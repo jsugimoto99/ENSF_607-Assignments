@@ -1,0 +1,100 @@
+@startuml
+
+abstract class Shape [[java:Shape]] {
+	#origin: Point
+	#name: Text
+	#{abstract} area(): Double
+	#{abstract} perimeter(): Double
+	#{abstract} volume(): Double
+	#Shape(x_origin: Double, y_origin: Double, name: String, colour: Colour)
+	#getOrigin(): Point
+	#getName(): String
+	#distance(other: Shape): Double
+	#distance(a: Shape, b: Shape): Double
+	#move(dx: Double, dy: Double): void
+	+toString(): String
+}
+
+class Point [[java:Point]] {
+	-colour: Colour
+	-xCoordinate: Double
+	-yCoordinate: Double
+	+Point(a: Double, b: Double, c: Colour)
+	+toString(): String
+	+getx(): Double
+	+setx(newvalue: Double): void
+	+gety(): Double
+	+sety(newvalue: Double): void
+	+distance(other: Point): Double
+	+{static} distance(that: Point, other: Point): Double
+}
+
+class Text [[java:Text]] {
+	-text: String
+	+Text(text: String)
+	+setText(newText: String): void
+	+getText(): String
+	+toString(): String
+}
+
+class Colour [[java:Colour]] {
+	-colour: String
+	+Colour(s: String)
+	+setColour(newColour: String): void
+	+toString(): String
+}
+
+class Rectangle [[java:Rectangle]] {
+	#width: Double
+	#length: Double
+	+Rectangle(x_origin: Double, y_origin: Double, newlength: Double, newwidth: Double, name: String, colour: Colour)
+	#set_length(newlength: Double): void
+	#get_length(): Double
+	#area(): Double
+	#perimeter(): Double
+	#volume(): Double
+	+toString(): String
+}
+
+class Circle [[java:Circle]] {
+	-radius: Double
+	~Circle(x_origin: Double, y_origin: Double, newradius: Double, name: String, colour: Colour)
+	+set_radius(newradius: Double): void
+	+get_radius(): Double
+	+area(): Double
+	+perimeter(): Double
+	+volume(): Double
+	+toString(): String
+}
+class Prism [[java:Prism]] {
+	-height: Double
+	+Prism(x: Double, y: Double, l: Double, w: Double, h: Double, name: String, colour: Colour)
+	+set_height(h: Double): void
+	+height(): Double
+	+area(): Double
+	+perimeter(): Double
+	+volume(): Double
+	+toString(): String
+}
+
+class Geometry [[java:Geometry]] {
+	-shapes: TreeSet<Shape>
+	+{static} main(args: String[]): void
+}
+
+Shape o-- Point: has-a
+Shape o-- Text: has-a
+Point o-- Colour: has-a
+
+Shape <|-- Rectangle: extends
+Shape <|-- Circle: extends
+Rectangle <|-- Prism: extends
+
+Geometry o-- Shape: has-a
+@enduml
+
+
+
+
+
+
